@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+
+# Database
+db.sqlite3
+
+# Media files (optional: include only what you want)
+# media/
+
+# Django migrations
+*/migrations/*.pyc
+*/migrations/__pycache__/
+
+# IDE / Editor files
+.vscode/
+*.swp
+*.idea/
+*.DS_Store
+
+# Logs
+*.log
+

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - MarketPlace{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="jumbotron jumbotron-fluid text-white text-center py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-top: 56px; position: relative;">
+    <!-- Dark overlay for better text readability -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);"></div>
+    
+    <div class="container py-5" style="position: relative; z-index: 2;">
+        <h1 class="display-4 mb-4" style="color: #fff; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+            <i class="fas fa-envelope me-3"></i>Get in Touch With Us
+        </h1>
+        
+        <div class="bg-dark bg-opacity-75 rounded-pill d-inline-block px-4 py-3 mb-3" style="backdrop-filter: blur(10px);">
+            <p class="lead mb-0" style="color: #fff; font-size: 1.4rem; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                We're here to answer any questions you might have. Feel free to reach out!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">
+                        <i class="fas fa-address-book me-2"></i>Contact Information
+                    </h2>
+                    <p class="text-center text-muted mb-5">
+                        We'd love to hear from you! Whether you have questions, feedback, or want to learn more about our products, reach out to us any time.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-envelope fa-2x"></i>
+                                </div>
+                                <h5>Email</h5>
+                                <p class="text-muted">support@marketplace.com</p>
+                                <a href="mailto:support@marketplace.com" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-paper-plane me-1"></i>Send Email
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-phone fa-2x"></i>
+                                </div>
+                                <h5>Phone</h5>
+                                <p class="text-muted">+1 (555) 123-4567</p>
+                                <a href="tel:+15551234567" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-phone me-1"></i>Call Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                        </div>
+                        <h5>Address</h5>
+                        <p class="text-muted">123 Market St, Commerce City</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MarketPlace{% endblock %}</title>
+    
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            padding-top: 90px; /* Increased padding to prevent interference */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced Navbar - Modern Design */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            z-index: 1050 !important;
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            padding: 0.5rem 0;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: headerShimmer 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes headerShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #fff !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        .navbar-brand i {
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9) !important;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.2rem !important;
+            border-radius: 25px;
+            margin: 0 3px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 25px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff !important;
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link.active {
+            background: rgba(255,255,255,0.2);
+            color: #fff !important;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-link.active::before {
+            opacity: 1;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Enhanced Hero Sections - Reduced size for better proportion */
+        .jumbotron {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            margin-bottom: 3rem; /* Reduced from 5rem */
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 0;
+            padding: 3rem 0; /* Reduced from 5rem */
+        }
+
+        .jumbotron::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 4s infinite;
+            z-index: 1;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Reduced Page Titles */
+        .display-4 {
+            font-weight: 700 !important; /* Reduced from 800 */
+            font-size: 2.5rem !important; /* Reduced from 3.5rem */
+            letter-spacing: -0.5px; /* Reduced from -1px */
+            line-height: 1.3; /* Reduced from 1.2 */
+            margin-bottom: 1rem; /* Reduced from 1.5rem */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .lead {
+            font-size: 1.2rem !important; /* Reduced from 1.5rem */
+            font-weight: 400; /* Reduced from 500 */
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .jumbotron .btn {
+            border-radius: 50px;
+            padding: 12px 30px; /* Reduced from 15px 40px */
+            font-weight: 600;
+            font-size: 1rem; /* Reduced from 1.1rem */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .jumbotron .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .jumbotron .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .jumbotron .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced Cards - Better spacing */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem; /* Increased margin */
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .card-img-top {
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.02);
+        }
+
+        /* Enhanced Buttons */
+        .btn {
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        }
+
+        /* Enhanced Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Enhanced Badges */
+        .badge {
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-weight: 500;
+        }
+
+        /* Enhanced Alerts */
+        .alert {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem; /* Added margin */
+        }
+
+        /* Enhanced Footer - Completely redesigned */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            margin-top: 6rem; /* Increased margin */
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section {
+            padding: 30px 0;
+        }
+
+        .footer-section h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-section h5::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .footer-section p {
+            color: #b8c5d6;
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #b8c5d6;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-section ul li a:hover {
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .footer-bottom {
+            background: rgba(0,0,0,0.2);
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-bottom p {
+            color: #8a9bb8;
+            margin: 0;
+        }
+
+        .footer-features {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-feature {
+            text-align: center;
+            color: #b8c5d6;
+        }
+
+        .footer-feature i {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .footer-feature h6 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        /* Loading Animation - Reduced intensity */
+        .loading {
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+
+        /* Floating Animation - Reduced movement */
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Enhanced Form Elements */
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Enhanced Pagination */
+        .pagination .page-link {
+            border-radius: 10px;
+            margin: 0 2px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .pagination .page-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Enhanced Breadcrumbs */
+        .breadcrumb {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem; /* Added margin */
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Container spacing improvements */
+        .container {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Section spacing */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        /* Row spacing */
+        .row {
+            margin-bottom: 2rem;
+        }
+
+        /* Content sections with proper spacing */
+        .content-section {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Responsive Enhancements */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 80px; /* Slightly less padding on mobile */
+            }
+
+            .navbar {
+                height: 70px;
+            }
+
+            .display-4 {
+                font-size: 2rem !important; /* Reduced from 2.5rem */
+                letter-spacing: -0.3px; /* Reduced from -0.5px */
+            }
+
+            .lead {
+                font-size: 1.1rem !important; /* Reduced from 1.2rem */
+            }
+
+            .jumbotron {
+                padding: 2rem 0; /* Reduced from 3rem */
+                margin-bottom: 2rem; /* Reduced from 3rem */
+            }
+
+            .card:hover {
+                transform: translateY(-3px);
+            }
+            
+            .jumbotron .btn:hover {
+                transform: translateY(-1px);
+            }
+
+            .footer-features {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .nav-link {
+                padding: 0.5rem 0.75rem !important;
+                margin: 0 1px;
+            }
+
+            .container {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .section-header {
+                font-size: 1.8rem; /* Reduced from 2rem */
+                margin-bottom: 1.5rem; /* Reduced from 2rem */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .display-4 {
+                font-size: 1.8rem !important; /* Reduced from 2rem */
+            }
+
+            .lead {
+                font-size: 1rem !important; /* Reduced from 1.1rem */
+            }
+
+            .jumbotron {
+                padding: 1.5rem 0; /* Reduced from 2rem */
+                margin-bottom: 1.5rem; /* Reduced from 2rem */
+            }
+
+            .section-header {
+                font-size: 1.6rem; /* Reduced from 1.8rem */
+                margin-bottom: 1rem; /* Reduced from 1.5rem */
+            }
+        }
+
+        /* Scroll behavior improvements */
+        html {
+            scroll-padding-top: 100px; /* Ensures smooth scrolling accounts for fixed navbar */
+        }
+
+        /* Additional spacing for content sections */
+        main {
+            padding-top: 1rem;
+        }
+
+        /* Product cards specific spacing */
+        .product-card {
+            margin-bottom: 2.5rem;
+        }
+
+        /* Statistics section spacing */
+        .stat-card {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'products:index' %}">
+                <i class="fas fa-store me-2 floating"></i>MarketPlace
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products:index' %}">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products:product_list' %}">
+                            <i class="fas fa-shopping-bag me-1"></i>Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products:product_create' %}">
+                            <i class="fas fa-plus me-1"></i>Add Product
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contactus:contact' %}">
+                            <i class="fas fa-envelope me-1"></i>Contact
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'aboutus:about' %}">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="container mt-4">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %} me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="text-white">
+        <div class="footer-content">
+            <!-- Features Section -->
+            <div class="footer-features">
+                <div class="footer-feature">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h6>Fast Delivery</h6>
+                    <small>Free shipping on orders over $50</small>
+                </div>
+                <div class="footer-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h6>Secure Payment</h6>
+                    <small>100% secure payment processing</small>
+                </div>
+                <div class="footer-feature">
+                    <i class="fas fa-headset"></i>
+                    <h6>24/7 Support</h6>
+                    <small>Round the clock customer service</small>
+                </div>
+                <div class="footer-feature">
+                    <i class="fas fa-undo"></i>
+                    <h6>Easy Returns</h6>
+                    <small>30-day money back guarantee</small>
+                </div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="container">
+                <div class="row footer-section">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <h5><i class="fas fa-store me-2 floating"></i>MarketPlace</h5>
+                        <p>Your trusted destination for quality products. We bring you the best selection with competitive prices and exceptional service.</p>
+                        <div class="social-links">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="{% url 'products:index' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                            <li><a href="{% url 'products:product_list' %}"><i class="fas fa-chevron-right me-2"></i>Products</a></li>
+                            <li><a href="{% url 'products:product_create' %}"><i class="fas fa-chevron-right me-2"></i>Add Product</a></li>
+                            <li><a href="{% url 'contactus:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5>Customer Service</h5>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Help Center</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Track Order</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Returns & Exchanges</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Size Guide</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5>Contact Info</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2 text-primary"></i>123 Market St, City, Country</li>
+                            <li><i class="fas fa-phone me-2 text-primary"></i>+1 (555) 123-4567</li>
+                            <li><i class="fas fa-envelope me-2 text-primary"></i>info@marketplace.com</li>
+                            <li><i class="fas fa-clock me-2 text-primary"></i>Mon-Fri: 9AM-6PM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2024 MarketPlace. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p>
+                            <a href="#" class="text-light me-3">Privacy Policy</a>
+                            <a href="#" class="text-light me-3">Terms of Service</a>
+                            <a href="#" class="text-light">Cookie Policy</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript for enhanced interactions -->
+    <script>
+        // Add loading animation to cards with reduced intensity
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.classList.add('loading');
+            });
+
+            // Remove loading class after animation
+            setTimeout(() => {
+                cards.forEach(card => card.classList.remove('loading'));
+            }, 1500);
+
+            // Add smooth scroll for anchor links with proper offset
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 100; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Reduced parallax effect
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.jumbotron');
+                if (parallax && scrolled < 500) {
+                    const speed = scrolled * 0.3;
+                    parallax.style.transform = `translateY(${speed}px)`;
+                }
+            });
+
+            // Add active class to current nav link
+            const currentLocation = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

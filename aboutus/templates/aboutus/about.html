@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - MarketPlace{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="jumbotron jumbotron-fluid text-white text-center py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-top: 56px; position: relative;">
+    <!-- Dark overlay for better text readability -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);"></div>
+    
+    <div class="container py-5" style="position: relative; z-index: 2;">
+        <h1 class="display-4 mb-4" style="color: #fff; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+            <i class="fas fa-info-circle me-3"></i>About MarketPlace
+        </h1>
+        
+        <div class="bg-dark bg-opacity-75 rounded-pill d-inline-block px-4 py-3 mb-3" style="backdrop-filter: blur(10px);">
+            <p class="lead mb-0" style="color: #fff; font-size: 1.4rem; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                Learn more about our mission, values, and commitment to quality.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <div class="text-center mb-5">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-store fa-3x"></i>
+                        </div>
+                        <h2>Our Story</h2>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                                <h5>Founded in 2020</h5>
+                                <p class="text-muted">Started with a vision to provide quality products to customers worldwide.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <i class="fas fa-users fa-3x text-success mb-3"></i>
+                                <h5>Trusted Destination</h5>
+                                <p class="text-muted">Grown to become a trusted online destination for quality products.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h4><i class="fas fa-bullseye me-2"></i>Our Mission</h4>
+                        <p class="lead text-muted">
+                            To bring you the best products from around the world, while keeping the shopping experience simple, secure, and enjoyable.
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <i class="fas fa-heart fa-2x text-danger mb-2"></i>
+                                <h6>Customer Satisfaction</h6>
+                                <p class="small text-muted">We prioritize your satisfaction above everything else.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <i class="fas fa-leaf fa-2x text-success mb-2"></i>
+                                <h6>Sustainability</h6>
+                                <p class="small text-muted">Committed to eco-friendly practices and products.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <i class="fas fa-lightbulb fa-2x text-warning mb-2"></i>
+                                <h6>Innovation</h6>
+                                <p class="small text-muted">Always looking for new ways to improve your experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
